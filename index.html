@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <title>Kalkulator Suhu</title>
 </head>
 <body>
     <main>
@@ -24,7 +24,8 @@
                 </header>
 
                 <article>
-                    <input type="number" id="celcius-input" />
+                    <textarea id="celcius-input" rows="1"></textarea>
+                    <!-- <input type="number" id="celcius-input" /> -->
                     <div class="container-button">
                         <button id="button-convert">Convert</button>
                         <button id="button-reset">Reset</button>
@@ -39,7 +40,8 @@
                 </header>
 
                 <article>
-                    <input type="number" id="fahrenheit-input" />
+                    <textarea id="fahrenheit-input" rows="1" ></textarea>
+                    <!-- <input type="number" id="fahrenheit-input" /> -->
                 </article>
             </section>
 
@@ -49,7 +51,7 @@
                 </header>
 
                 <article>
-                    <textarea id="calculation-result" rows="1" readonly></textarea>
+                    <textarea  id="calculation-result" rows="1" readonly></textarea>
                 </article>
             </section>
             
@@ -59,59 +61,32 @@
                 </header>
                 <hr>
                 <article>
-                    <h1 class="formula-s">S<sub>(&deg;F)</sub> = (S<sub>(&deg;C)</sub> * 9/5) + 32</h1>
+                    <p class="formula">Suhu <span class="formula-s">
+                        S</span> dalam derajat Fahrenheit (&deg;F) sama dengan suhu <span class="formula-s">S</span> 
+                        dalam derajat Celcius (&deg;C) kali 9/5 tambah 32
+                    </p>
+                    <h1 class="formula-s">S<sub>(&deg;F)</sub> = (S<sub>(&deg;C)</sub><span> * 9/5) + 32</span></h1>
+                    <p>atau</p>
+                    <h1 class="formula-s">S<sub>(&deg;F)</sub> = (S<sub>(&deg;C)</sub><span> * 1.8) + 32</span></h1>
+                </article>
+
+
+                <br>
+                <header>
+                    <h3>Cara Konversi dari (&deg;F) ke (&deg;C)</h3>
+                </header>
+                <hr>
+                <article>
+                    <p class="formula">Suhu <span class="formula-s">
+                        S</span> dalam derajat Celcius (&deg;C) sama dengan suhu <span class="formula-s">S</span> 
+                        dalam derajat Fahrenheit (&deg;F) kurang 32 kali 5/9
+                    </p>
+                    <h1 class="formula-s">S<sub>(&deg;C)</sub> = (S<sub>(&deg;F)</sub><span> - 32) * 5/9</span> </h1>
                 </article>
             </section>
         </section>
     </main>
 
-    <script>
-        const celciusInput = document.getElementById('celcius-input');
-        const fahrenheitInput = document.getElementById('fahrenheit-input');
-        const convertButton = document.getElementById('button-convert');
-        const resetButton = document.getElementById('button-reset');
-        const reverseButton = document.getElementById('button-reverse');
-        const calculationResult = document.getElementById('calculation-result');
-
-        function convertToCelcius(fahrenheit) {
-            return (fahrenheit - 32) * 5 / 9;
-        }
-
-        function convertToFahrenheit(celcius) {
-            return (celcius * 9 / 5) + 32;
-        }
-
-        function convertTemperature() {
-            const celcius = parseFloat(celciusInput.value);
-            const fahrenheit = parseFloat(fahrenheitInput.value);
-
-            if (!isNaN(celcius)) {
-                const result = convertToFahrenheit(celcius);
-                fahrenheitInput.value = result.toFixed(2);
-                calculationResult.value = `${celcius} &deg;C = ${result.toFixed(2)} &deg;F`;
-            } else if (!isNaN(fahrenheit)) {
-                const result = convertToCelcius(fahrenheit);
-                celciusInput.value = result.toFixed(2);
-                calculationResult.value = `${fahrenheit} &deg;F = ${result.toFixed(2)} &deg;C`;
-            }
-        }
-
-        function resetInputs() {
-            celciusInput.value = '';
-            fahrenheitInput.value = '';
-            calculationResult.value = '';
-        }
-
-        function reverseConversion() {
-            const temp = celciusInput.value;
-            celciusInput.value = fahrenheitInput.value;
-            fahrenheitInput.value = temp;
-            convertTemperature();
-        }
-
-        convertButton.addEventListener('click', convertTemperature);
-        resetButton.addEventListener('click', resetInputs);
-        reverseButton.addEventListener('click', reverseConversion);
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
