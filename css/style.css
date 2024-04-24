@@ -9,6 +9,9 @@ main {
 
 .main-title {
     text-align: center;
+    color: aqua;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: aquamarine;
 }
 
 .main-section {
