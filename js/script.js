@@ -2,8 +2,10 @@ const celciusInput = document.getElementById('celcius-input');
 const fahrenheitInput = document.getElementById('fahrenheit-input');
 const convertButton = document.getElementById('button-convert');
 const resetButton = document.getElementById('button-reset');
-const reverseButton = document.getElementById('button-reverse');
 const calculationResult = document.getElementById('calculation-result');
+
+const celciusSection = document.querySelector('.section-celcius');
+const fahrenheitSection = document.querySelector('.section-farenheit');
 
 function convertToCelcius(fahrenheit) {
     return (fahrenheit - 32) * 5 / 9;
@@ -21,14 +23,12 @@ function convertTemperature() {
     if (!isNaN(celcius)) {
         const result = convertToFahrenheit(celcius);
         fahrenheitInput.value = result.toFixed(2);
-        // calculationResult.value = `${celcius} &deg;C = ${result.toFixed(2)} &deg;F`;
-        calculationResult.value = `${result.toFixed(2)} °F = (${celcius} °C * 9/5) + 32`;
+        calculationResult.value = `(${celcius} °C * 9/5) + 32 = ${result.toFixed(2)} °F`;
        
     } else if (!isNaN(fahrenheit)) {
         const result = convertToCelcius(fahrenheit);
         celciusInput.value = result.toFixed(2);
-        //calculationResult.value = `${fahrenheit} &deg;F = ${result.toFixed(2)} &deg;C`;
-        calculationResult.value = `${result.toFixed(2)} °C = (${fahrenheit} °F - 32) * 5/9`;
+        calculationResult.value = `(${fahrenheit} °F - 32) * 5/9 = ${result.toFixed(2)} °C`;
     }else{
         alert("Silahkan masukkan angka");
         return resetInputs();
@@ -41,13 +41,18 @@ function resetInputs() {
     calculationResult.value = '';
 }
 
-function reverseConversion() {
-    const temp = celciusInput.value;
-    celciusInput.value = fahrenheitInput.value;
-    fahrenheitInput.value = temp;
-    convertTemperature();
+
+
+// Fungsi untuk membalikkan posisi section
+function reverseSections() {
+    const parent = celciusSection.parentNode;
+    if (parent.firstElementChild === celciusSection) {
+        parent.insertBefore(fahrenheitSection, celciusSection);
+    } else {
+        parent.insertBefore(celciusSection, fahrenheitSection);
+    }
 }
+document.getElementById('button-reverse').addEventListener('click', reverseSections);
 
 convertButton.addEventListener('click', convertTemperature);
 resetButton.addEventListener('click', resetInputs);
-reverseButton.addEventListener('click', reverseConversion);
